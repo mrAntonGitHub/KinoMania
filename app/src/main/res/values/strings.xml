@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">KinoMania</string>
+    <string name="title_home">Главная</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="top_100">Топ 100</string>
+    <string name="top_250">Топ 250</string>
+    <string name="coming_films">Ожидаемые</string>
+    <string name="title_category">Категории</string>
+
+    <string name="release_data">Год релиза: %s</string>
+    <string name="country">Страна: %s</string>
+    <string name="imdb_rate">Рейтинг IMDB: %s</string>
+    <string name="critics_rate">Рейтинг критиков: %s</string>
+    <string name="budget">Бюджет: %s</string>
+    <string name="back">Назад</string>
+    <string name="show_trailer">Смотреть трейлер</string>
+    <string name="description">Описание</string>
+    <string name="directors">Режиссеры</string>
+    <string name="actors">Актеры</string>
+    <string name="other_staff">Над фильмом также работали</string>
+    <string name="reviews">Рецензии</string>
+    <string name="film">Фильм</string>
+    <string name="rate_value">%1$s до %2$s</string>
+    <string name="year_value">%1$s по %2$s</string>
+    <string name="film_length">%1$s ч. %2$s мин.</string>
+    <string name="data">%1$s.%2$s.%3$s</string>
+    <string name="data_and_age">%1$s.%2$s.%3$s (%4$s)</string>
+    <string name="data_and_death_age">%1$s.%2$s.%3$s - %4$s.%5$s.%6$s(%7$s)</string>
+    <string name="film_length_minutes">%s мин.</string>
+    <string name="show_more">Показать еще</string>
+    <string name="films">Фильмы</string>
+    <string name="facts">Факты</string>
+    <string name="did_you_know">А Вы знали что</string>
+    <string name="reload">Обновить</string>
+    <string name="internet_connection_require">Для получения актуальной информации требуется подключение к интернету</string>
+    <string name="show_all">Показать все</string>
+
+</resources>

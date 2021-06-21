@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:paddingStart="0dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/layout"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="10"
+            app:layout_constraintEnd_toStartOf="@id/icon"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                tools:text="Заголовок" />
+
+            <TextView
+                android:id="@+id/subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="Подзаголовок" />
+
+        </LinearLayout>
+
+        <ImageView
+            app:layout_constraintStart_toEndOf="@id/layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/icon"
+            app:layout_constraintHorizontal_weight="2"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="0dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            app:tint="@color/black"
+            android:src="@drawable/ic_sort" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="i.o.mob.dev.kinomania.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_movieFragment"
+            app:destination="@id/movieFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_setParametersFragment"
+            app:destination="@id/setParametersFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_filmsGridFragment"
+            app:destination="@id/filmsGridFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="i.o.mob.dev.kinomania.ui.categories.CategoryFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_parameteredFilmsFragment"
+            app:destination="@id/parameteredFilmsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="i.o.mob.dev.kinomania.ui.search.SearchFragment"
+        android:label="search_fragment"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_searchFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="i.o.mob.dev.kinomania.ui.movie.MovieFragment"
+        android:label="MovieFragment" >
+        <action
+            android:id="@+id/action_movieFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <argument
+            android:name="filmId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_movieFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_movieFragment_to_staffFragment"
+            app:destination="@id/staffFragment" />
+        <action
+            android:id="@+id/action_movieFragment_to_parameteredFilmsFragment"
+            app:destination="@id/parameteredFilmsFragment" />
+        <action
+            android:id="@+id/action_movieFragment_to_filmsGridFragment"
+            app:destination="@id/filmsGridFragment" />
+        <action
+            android:id="@+id/action_movieFragment_to_reviewFragment"
+            app:destination="@id/reviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setParametersFragment"
+        android:name="i.o.mob.dev.kinomania.ui.search.parametersSearch.SetParametersFragment"
+        android:label="fragment_set_parameters"
+        tools:layout="@layout/fragment_set_parameters" >
+        <action
+            android:id="@+id/action_setParametersFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_setParametersFragment_to_parameteredFilmsFragment"
+            app:destination="@id/parameteredFilmsFragment" />
+        <action
+            android:id="@+id/action_setParametersFragment_self"
+            app:destination="@id/setParametersFragment" />
+        <action
+            android:id="@+id/action_setParametersFragment_to_itemFragment2"
+            app:destination="@id/itemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/parameteredFilmsFragment"
+        android:name="i.o.mob.dev.kinomania.ui.search.parametersSearch.ParameteredFilmsFragment"
+        android:label="parametered_films_fragment"
+        tools:layout="@layout/fragment_parametered_films" >
+        <action
+            android:id="@+id/action_parameteredFilmsFragment_to_setParametersFragment"
+            app:destination="@id/setParametersFragment" />
+        <action
+            android:id="@+id/action_parameteredFilmsFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+        <action
+            android:id="@+id/action_parameteredFilmsFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/staffFragment"
+        android:name="i.o.mob.dev.kinomania.ui.staff.StaffFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_staff" >
+        <action
+            android:id="@+id/action_staffFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+        <argument
+            android:name="staffId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemFragment"
+        android:name="i.o.mob.dev.kinomania.ui.search.parametersSearch.selectItem.ItemFragment"
+        android:label="ItemFragment" >
+        <action
+            android:id="@+id/action_itemFragment_to_setParametersFragment2"
+            app:destination="@id/setParametersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filmsGridFragment"
+        android:name="i.o.mob.dev.kinomania.ui.filmsGrid.FilmsGridFragment"
+        android:label="films_grid_fragment"
+        tools:layout="@layout/fragment_grid_films" >
+        <action
+            android:id="@+id/action_filmsGridFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_filmsGridFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="i.o.mob.dev.kinomania.ui.review.ReviewFragment"
+        android:label="review_fragment"
+        tools:layout="@layout/review_fragment" >
+        <action
+            android:id="@+id/action_reviewFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+    </fragment>
+
+</navigation>
