@@ -5,9 +5,9 @@ import i.o.mob.dev.kinomania.di.component.AppComponent
 import i.o.mob.dev.kinomania.di.component.DaggerAppComponent
 import i.o.mob.dev.kinomania.di.modules.AppModule
 
-class Application : Application(){
+class Application : Application() {
 
-    companion object{
+    companion object {
         lateinit var application: i.o.mob.dev.kinomania.Application
     }
 

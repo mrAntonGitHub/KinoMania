@@ -1,21 +1,17 @@
-package i.o.mob.dev.kinomania.ui.search.parametersSearch
+package i.o.mob.dev.kinomania.ui.parameteredSearch
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import i.o.mob.dev.kinomania.R
 import i.o.mob.dev.kinomania.adapters.FilmsLandAdapter
 import i.o.mob.dev.kinomania.adapters.FilmsLandAdapterDelegate
 import i.o.mob.dev.kinomania.data.FilmByKeyword
-import i.o.mob.dev.kinomania.utils.Utils
 import i.o.mob.dev.kinomania.utils.Utils.Companion.hideBottomNavigation
 import i.o.mob.dev.kinomania.utils.Utils.Companion.transparentStatusBar
 import kotlinx.android.synthetic.main.fragment_parametered_films.*
@@ -56,21 +52,38 @@ class ParameteredFilmsFragment : Fragment(R.layout.fragment_parametered_films),
                 lifecycleScope.launchWhenCreated {
                     progress.visibility = View.VISIBLE
                     val films = viewModel.loadFilms(this@ParameteredFilmsFragment.parameters)
-                    if (films!= null){
+                    if (films != null) {
                         films.let {
-                            it.films?.let { it.map { FilmByKeyword(it.countries, null, it.filmId, null, it.genres, it.nameEn, it.nameRu, it.posterUrl, it.posterUrlPreview, it.rating, it.ratingVoteCount, it.type, it.year) }
+                            it.films?.let {
+                                it.map {
+                                    FilmByKeyword(
+                                        it.countries,
+                                        null,
+                                        it.filmId,
+                                        null,
+                                        it.genres,
+                                        it.nameEn,
+                                        it.nameRu,
+                                        it.posterUrl,
+                                        it.posterUrlPreview,
+                                        it.rating,
+                                        it.ratingVoteCount,
+                                        it.type,
+                                        it.year
+                                    )
+                                }
                             }?.let { it1 ->
                                 filmsLandAdapter.submitList(it1)
                                 progress.visibility = View.GONE
                                 nothingToShow.visibility = View.GONE
                             }
                         }
-                    }else{
+                    } else {
                         nothingToShow.visibility = View.VISIBLE
                         progress.visibility = View.GONE
                     }
                 }
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e("ParameteredFilmsFrg", e.toString())
             }
 

@@ -74,9 +74,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    tools:src="@drawable/ic_saw"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent" />
+                    app:layout_constraintTop_toBottomOf="parent"
+                    tools:src="@drawable/ic_saw" />
 
             </androidx.cardview.widget.CardView>
 
@@ -105,9 +105,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:fontFamily="sans-serif"
-                    tools:text="Актер, сценарист, продюсер"
                     android:textColor="@color/textRegularColor"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:text="Актер, сценарист, продюсер" />
 
                 <TextView
                     android:id="@+id/age"
@@ -115,9 +115,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:fontFamily="sans-serif"
-                    tools:text="28.01.1985 (50)"
                     android:textColor="@color/textRegularColor"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:text="28.01.1985 (50)" />
 
             </LinearLayout>
 

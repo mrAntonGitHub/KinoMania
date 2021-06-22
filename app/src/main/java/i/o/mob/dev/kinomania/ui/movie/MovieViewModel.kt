@@ -1,6 +1,5 @@
 package i.o.mob.dev.kinomania.ui.movie
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import i.o.mob.dev.kinomania.Application
 import i.o.mob.dev.kinomania.data.*
@@ -11,7 +10,8 @@ import javax.inject.Singleton
 @Singleton
 class MovieViewModel : ViewModel() {
 
-    @Inject lateinit var repositoryDelegate: RepositoryDelegate
+    @Inject
+    lateinit var repositoryDelegate: RepositoryDelegate
 
     var film: FilmWrapper? = null
     var filmFrame: FilmFrame? = null

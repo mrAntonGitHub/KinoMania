@@ -1,8 +1,5 @@
 package i.o.mob.dev.kinomania.ui.staff
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import i.o.mob.dev.kinomania.Application
 import i.o.mob.dev.kinomania.data.Staff
@@ -13,20 +10,22 @@ import javax.inject.Singleton
 @Singleton
 class StaffViewModel : ViewModel() {
 
-    @Inject lateinit var repositoryDelegate: RepositoryDelegate
+    @Inject
+    lateinit var repositoryDelegate: RepositoryDelegate
 
     init {
         Application.application.appComponent.inject(this)
     }
 
-    private var staff : Staff? = null
+    private var staff: Staff? = null
 
     suspend fun getStaff(staffId: Int): Staff? {
-        return if(staff != null){
+        return if (staff != null) {
             staff
-        }else{
+        } else {
             val staff: Staff? = repositoryDelegate.getStaff(staffId)
-            val sortedFilms = repositoryDelegate.getStaff(staffId)?.films?.sortedByDescending { it.rating }
+            val sortedFilms =
+                repositoryDelegate.getStaff(staffId)?.films?.sortedByDescending { it.rating }
             staff?.films = sortedFilms?.distinctBy { it.filmId }
             this.staff = staff
             this.staff

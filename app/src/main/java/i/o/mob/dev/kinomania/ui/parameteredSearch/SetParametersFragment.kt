@@ -1,18 +1,18 @@
-package i.o.mob.dev.kinomania.ui.search.parametersSearch
+package i.o.mob.dev.kinomania.ui.parameteredSearch
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import i.o.mob.dev.kinomania.R
-import i.o.mob.dev.kinomania.ui.search.parametersSearch.selectItem.LIST_COUNTRY
-import i.o.mob.dev.kinomania.ui.search.parametersSearch.selectItem.LIST_GENRE
-import i.o.mob.dev.kinomania.ui.search.parametersSearch.selectItem.LIST_TYPE
+import i.o.mob.dev.kinomania.ui.parameteredSearch.selectItem.LIST_COUNTRY
+import i.o.mob.dev.kinomania.ui.parameteredSearch.selectItem.LIST_GENRE
+import i.o.mob.dev.kinomania.ui.parameteredSearch.selectItem.LIST_TYPE
 import i.o.mob.dev.kinomania.utils.Utils.Companion.hideBottomNavigation
 import kotlinx.android.synthetic.main.fragment_set_parameters.*
 import java.util.*
@@ -99,9 +99,9 @@ class SetParametersFragment : Fragment(R.layout.fragment_set_parameters) {
 
         search.setOnClickListener {
             val types = mutableListOf<String>()
-            if (viewModel.selectedTypes.count() == 2){
+            if (viewModel.selectedTypes.count() == 2) {
                 types.add("All")
-            }else{
+            } else {
                 viewModel.selectedTypes.forEach {
                     types.add(it.key)
                 }
@@ -131,7 +131,6 @@ class SetParametersFragment : Fragment(R.layout.fragment_set_parameters) {
                     "ratingTo" to ratingTo.toString()
                 ))
             )
-            Log.e("dsfsdfsdfsdfsd", "$bundle")
             findNavController().navigate(
                 R.id.action_setParametersFragment_to_parameteredFilmsFragment,
                 bundle
@@ -142,10 +141,6 @@ class SetParametersFragment : Fragment(R.layout.fragment_set_parameters) {
             viewModel.selectedTypes.clear()
             viewModel.selectedGenres.clear()
             viewModel.selectedCountries.clear()
-            Log.e(
-                "dsfsdfsdfsdf",
-                "${viewModel.selectedTypes} ${viewModel.selectedGenres} ${viewModel.selectedCountries}"
-            )
             typeSelected.text = "Любые"
             genreSelected.text = "Любые"
             countrySelected.text = "Любые"

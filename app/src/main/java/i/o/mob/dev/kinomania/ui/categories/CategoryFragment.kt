@@ -8,8 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import i.o.mob.dev.kinomania.R
 import i.o.mob.dev.kinomania.adapters.SimpleAdapter
@@ -36,12 +34,17 @@ class CategoryFragment : Fragment(R.layout.fragment_categories), SimpleAdapterDe
 
         simpleAdapter = SimpleAdapter()
         simpleAdapter.setDelegate(this)
-        categoriesRv.addItemDecoration(DividerItemDecoration(requireActivity(), RecyclerView.VERTICAL))
+        categoriesRv.addItemDecoration(
+            DividerItemDecoration(
+                requireActivity(),
+                RecyclerView.VERTICAL
+            )
+        )
         categoriesRv.setHasFixedSize(true)
         categoriesRv.adapter = simpleAdapter
 
         lifecycleScope.launchWhenCreated {
-            val categories= viewModel.getCategories()
+            val categories = viewModel.getCategories()
             categories?.let {
                 simpleAdapter.submitList(categories.map { it.genre })
             }
@@ -54,8 +57,14 @@ class CategoryFragment : Fragment(R.layout.fragment_categories), SimpleAdapterDe
             val genres = viewModel.getCategories()
             val id = genres?.get(position)?.id
             id.let {
-                val bundle = bundleOf("title" to "${genres?.get(position)?.genre}","key" to (mapOf("genre" to id.toString())))
-                findNavController().navigate(R.id.action_navigation_dashboard_to_parameteredFilmsFragment, bundle)
+                val bundle = bundleOf(
+                    "title" to "${genres?.get(position)?.genre}",
+                    "key" to (mapOf("genre" to id.toString()))
+                )
+                findNavController().navigate(
+                    R.id.action_navigation_dashboard_to_parameteredFilmsFragment,
+                    bundle
+                )
             }
         }
     }

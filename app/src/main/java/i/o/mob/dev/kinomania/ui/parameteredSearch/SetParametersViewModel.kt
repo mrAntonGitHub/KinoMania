@@ -1,10 +1,8 @@
-package i.o.mob.dev.kinomania.ui.search.parametersSearch
+package i.o.mob.dev.kinomania.ui.parameteredSearch
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import i.o.mob.dev.kinomania.Application
 import i.o.mob.dev.kinomania.data.Filter
-import i.o.mob.dev.kinomania.data.Keyword
 import i.o.mob.dev.kinomania.repository.RepositoryDelegate
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -16,7 +14,8 @@ class SetParametersViewModel : ViewModel() {
     var selectedGenres = mutableMapOf<String, String>()
     var selectedCountries = mutableMapOf<String, String>()
 
-    @Inject lateinit var repositoryDelegate: RepositoryDelegate
+    @Inject
+    lateinit var repositoryDelegate: RepositoryDelegate
 
     init {
         Application.application.appComponent.inject(this)
@@ -25,9 +24,9 @@ class SetParametersViewModel : ViewModel() {
     private var filters: Filter? = null
 
     suspend fun getFilters(): Filter? {
-        return if (filters != null){
+        return if (filters != null) {
             filters
-        }else{
+        } else {
             filters = repositoryDelegate.getFilters()
             filters
         }

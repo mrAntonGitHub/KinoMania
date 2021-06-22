@@ -13,6 +13,6 @@ sealed class State<T> {
         fun <T> loading() = Loading<T>()
         fun <T> success(data: T) = Success<T>(data)
         fun <T> error(exception: Exception?, message: String? = null) = Error<T>(exception, message)
-        fun <T> noMoreData(data : T) = NoMoreData<T>(data)
+        fun <T> noMoreData(data: T) = NoMoreData<T>(data)
     }
 }

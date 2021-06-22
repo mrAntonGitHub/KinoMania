@@ -8,9 +8,10 @@ import i.o.mob.dev.kinomania.data.TopFilmItem
 import i.o.mob.dev.kinomania.data.TopFilmsType
 import i.o.mob.dev.kinomania.repository.RepositoryDelegate
 import i.o.mob.dev.kinomania.utils.State
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -18,7 +19,8 @@ import javax.inject.Singleton
 @Singleton
 class HomeViewModel : ViewModel() {
 
-    @Inject lateinit var repository: RepositoryDelegate
+    @Inject
+    lateinit var repository: RepositoryDelegate
 
     private val _top100 = MutableStateFlow<State<List<TopFilmItem>>>(State.loading())
     val top100 = _top100 as StateFlow<State<List<TopFilmItem>>>
@@ -30,69 +32,71 @@ class HomeViewModel : ViewModel() {
     val topAwait = _topAwait as StateFlow<State<List<TopFilmItem>>>
 
     init {
-        Log.e("HomeViewModel", "1")
         Application.application.appComponent.inject(this)
         initialListLoad()
     }
 
-    private fun initialListLoad(){
+    private fun initialListLoad() {
         viewModelScope.launch(IO) {
             repository.top100Films(false).collect {
                 _top100.value = it
-                when(it){
-                    is State.Success-> {
-                        if (it.data.isEmpty()){
+                when (it) {
+                    is State.Success -> {
+                        if (it.data.isEmpty()) {
                             loadMoreContent(TopFilmsType.TOP_100_POPULAR_FILMS)
                         }
                     }
                     is State.NoMoreData -> {
-                        if (it.data.isEmpty()){
+                        if (it.data.isEmpty()) {
                             loadMoreContent(TopFilmsType.TOP_100_POPULAR_FILMS)
                         }
                     }
-                    else -> {}
+                    else -> {
+                    }
                 }
             }
 
             repository.top250Films(false).collect {
                 _top250.value = it
-                when(it){
-                    is State.Success-> {
-                        if (it.data.isEmpty()){
+                when (it) {
+                    is State.Success -> {
+                        if (it.data.isEmpty()) {
                             loadMoreContent(TopFilmsType.TOP_250_BEST_FILMS)
                         }
                     }
                     is State.NoMoreData -> {
-                        if (it.data.isEmpty()){
+                        if (it.data.isEmpty()) {
                             loadMoreContent(TopFilmsType.TOP_250_BEST_FILMS)
                         }
                     }
-                    else -> {}
+                    else -> {
+                    }
                 }
             }
 
             repository.topAwaitFilms(false).collect {
                 _topAwait.value = it
-                when(it){
-                    is State.Success-> {
-                        if (it.data.isEmpty()){
+                when (it) {
+                    is State.Success -> {
+                        if (it.data.isEmpty()) {
                             loadMoreContent(TopFilmsType.TOP_AWAIT_FILMS)
                         }
                     }
                     is State.NoMoreData -> {
-                        if (it.data.isEmpty()){
+                        if (it.data.isEmpty()) {
                             loadMoreContent(TopFilmsType.TOP_AWAIT_FILMS)
                         }
                     }
-                    else -> {}
+                    else -> {
+                    }
                 }
             }
         }
     }
 
 
-    suspend fun loadMoreContent(type: TopFilmsType){
-        when(type){
+    suspend fun loadMoreContent(type: TopFilmsType) {
+        when (type) {
             TopFilmsType.TOP_100_POPULAR_FILMS -> {
                 _top100.value = State.loading()
                 repository.top100Films(true).collect {

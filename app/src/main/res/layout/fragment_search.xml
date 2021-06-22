@@ -57,17 +57,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/nothingToShow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="По вашему запросу ничего не найдено"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:visibility="gone"
-        android:layout_marginTop="20dp"/>
+        android:text="По вашему запросу ничего не найдено"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/filmsRv"
@@ -75,9 +75,9 @@
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="10"
-        android:orientation="vertical"
-        tools:listitem="@layout/item_movie_land"/>
+        tools:listitem="@layout/item_movie_land" />
 
 </LinearLayout>

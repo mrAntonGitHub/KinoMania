@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="4dp"
-        android:overScrollMode="never"
         android:layout_marginEnd="4dp"
+        android:overScrollMode="never"
         app:layoutManager="LinearLayoutManager"
-        tools:context=".ui.search.parametersSearch.selectItem.ItemFragment"
+        tools:context=".ui.parameteredSearch.selectItem.ItemFragment"
         tools:listitem="@android:layout/simple_list_item_1" />
 </FrameLayout>

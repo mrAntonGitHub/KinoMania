@@ -1,7 +1,6 @@
 package i.o.mob.dev.kinomania.ui.staff
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -58,16 +57,18 @@ class StaffFragment : Fragment(R.layout.fragment_staff), FilmsAdapterDelegate {
                         it.birthday?.substring(0..3),
                         it.age.toString()
                     )
-                    if (it.death != null){
-                        age.text = String.format(resources.getString(R.string.data_and_death_age),
+                    if (it.death != null) {
+                        age.text = String.format(
+                            resources.getString(R.string.data_and_death_age),
                             it.birthday?.substring(8..9),
                             it.birthday?.substring(5..6),
                             it.birthday?.substring(0..3),
                             it.death.substring(8..9),
                             it.death.substring(5..6),
                             it.death.substring(0..3),
-                            it.age.toString())
-                    }else{
+                            it.age.toString()
+                        )
+                    } else {
                         age.text = birth
                     }
 
@@ -77,7 +78,6 @@ class StaffFragment : Fragment(R.layout.fragment_staff), FilmsAdapterDelegate {
                         filmTitle.visibility = View.GONE
                     }
                     if (!it.facts.isNullOrEmpty()) {
-                        Log.e("sdfsdfsdfsfdsf", "${it.facts.size}")
                         factsAdapter.submitList(it.facts)
                     } else {
                         factsTitle.visibility = View.GONE

@@ -1,17 +1,14 @@
 package i.o.mob.dev.kinomania.ui.movie
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -53,15 +50,10 @@ class MovieFragment : Fragment(R.layout.fragment_movie), StaffAdapterDelegate,
         arguments?.getInt("filmId")?.let { filmId ->
             lifecycleScope.launchWhenStarted {
                 val film = viewModel.getFilm(filmId)
-                Log.e("MovieFragment", "1")
                 val filmFrames = viewModel.getFilmFrame(filmId)?.frames
-                Log.e("MovieFragment", "2")
                 val staff = viewModel.getFilmStaff(filmId)
-                Log.e("MovieFragment", "3")
                 val reviews = viewModel.getFilmReview(filmId)?.reviews
-                Log.e("MovieFragment", "4")
                 val videos = viewModel.getFilmVideos(filmId)
-                Log.e("MovieFragment", "5")
                 isLoading(false)
                 film?.let { setupItems(it, filmFrames, videos) }
                 setupStaffList(staff)
@@ -94,13 +86,11 @@ class MovieFragment : Fragment(R.layout.fragment_movie), StaffAdapterDelegate,
         filmName.showDataOrHide(film.data.nameRu)
         rate.showDataOrHide(film.rating.rating.toString())
         val time = film.data.filmLength?.split(':')
-        Log.e("MovieFragment", "${time?.get(0)}")
-        if (time?.get(0) == "00" && time[1] == "00"){
+        if (time?.get(0) == "00" && time[1] == "00") {
             length.visibility = View.GONE
-        }
-        else if (time?.get(0) != "00") {
+        } else if (time?.get(0) != "00") {
             length.showDataOrHide("${time?.get(0)} ч. ${time?.get(1)} мин.")
-        } else if (time[1] != "00"){
+        } else if (time[1] != "00") {
             length.showDataOrHide("${time[1]} мин.")
         }
         genre.showDataOrHide(
@@ -166,8 +156,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie), StaffAdapterDelegate,
         serviceAdapter.setDelegate(this)
         directorsAdapter.setDelegate(this)
         actorsAdapter.setDelegate(this)
-        Log.e("dsfsdfsdfdsfs", "${staff}")
-        if (staff != null){
+        if (staff != null) {
             staff.let {
                 val actors = it.filter { it.professionText == "Актеры" }
                 val directors = it.filter { it.professionText == "Режиссеры" }
@@ -200,11 +189,16 @@ class MovieFragment : Fragment(R.layout.fragment_movie), StaffAdapterDelegate,
                         requireContext(),
                         4,
                         LinearLayoutManager.HORIZONTAL,
-                        false)
-                }
-                else {
+                        false
+                    )
+                } else {
                     serviceRv.layoutManager =
-                        GridLayoutManager(requireContext(), 1, LinearLayoutManager.HORIZONTAL, false)
+                        GridLayoutManager(
+                            requireContext(),
+                            1,
+                            LinearLayoutManager.HORIZONTAL,
+                            false
+                        )
                     serviceRv.adapter = serviceAdapter
                 }
                 serviceRv.setHasFixedSize(false)
@@ -213,7 +207,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie), StaffAdapterDelegate,
                 if (directors.isNullOrEmpty()) directorsTitle.visibility = View.GONE
                 if (service.isNullOrEmpty()) serviceTitle.visibility = View.GONE
             }
-        }else{
+        } else {
             actorsTitle.visibility = View.GONE
             directorsTitle.visibility = View.GONE
             serviceTitle.visibility = View.GONE

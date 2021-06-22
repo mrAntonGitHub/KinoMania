@@ -1,11 +1,7 @@
 package i.o.mob.dev.kinomania.ui.categories
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import i.o.mob.dev.kinomania.Application
-import i.o.mob.dev.kinomania.data.Filter
-import i.o.mob.dev.kinomania.data.Genre
 import i.o.mob.dev.kinomania.data.GenreFilter
 import i.o.mob.dev.kinomania.repository.RepositoryDelegate
 import javax.inject.Inject

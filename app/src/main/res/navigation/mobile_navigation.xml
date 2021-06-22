@@ -75,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/setParametersFragment"
-        android:name="i.o.mob.dev.kinomania.ui.search.parametersSearch.SetParametersFragment"
+        android:name="i.o.mob.dev.kinomania.ui.parameteredSearch.SetParametersFragment"
         android:label="fragment_set_parameters"
         tools:layout="@layout/fragment_set_parameters" >
         <action
@@ -93,7 +93,7 @@
     </fragment>
     <fragment
         android:id="@+id/parameteredFilmsFragment"
-        android:name="i.o.mob.dev.kinomania.ui.search.parametersSearch.ParameteredFilmsFragment"
+        android:name="i.o.mob.dev.kinomania.ui.parameteredSearch.ParameteredFilmsFragment"
         android:label="parametered_films_fragment"
         tools:layout="@layout/fragment_parametered_films" >
         <action
@@ -120,7 +120,7 @@
     </fragment>
     <fragment
         android:id="@+id/itemFragment"
-        android:name="i.o.mob.dev.kinomania.ui.search.parametersSearch.selectItem.ItemFragment"
+        android:name="i.o.mob.dev.kinomania.ui.parameteredSearch.selectItem.ItemFragment"
         android:label="ItemFragment" >
         <action
             android:id="@+id/action_itemFragment_to_setParametersFragment2"

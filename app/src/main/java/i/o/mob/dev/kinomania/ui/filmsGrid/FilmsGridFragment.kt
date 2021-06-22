@@ -1,10 +1,10 @@
 package i.o.mob.dev.kinomania.ui.filmsGrid
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -41,14 +41,16 @@ class FilmsGridFragment : Fragment(R.layout.fragment_grid_films), FilmsGridAdapt
 
         adapter.setDelegate(this)
         filmsRv.addItemDecoration(VerticalSpaceItemDecorator())
-        filmsRv.layoutManager = GridLayoutManager(requireActivity(), resources.getInteger(R.integer.films_raw_count))
+        filmsRv.layoutManager =
+            GridLayoutManager(requireActivity(), resources.getInteger(R.integer.films_raw_count))
         filmsRv.adapter = adapter
 
         arguments?.getString("type")?.let {
             lifecycleScope.launchWhenCreated {
                 viewModel.films.collect { state ->
-                    when(state){
-                        is State.Loading -> { }
+                    when (state) {
+                        is State.Loading -> {
+                        }
                         is State.Success -> {
                             withContext(Dispatchers.Main) {
                                 adapter.submitList(state.data)
@@ -67,7 +69,7 @@ class FilmsGridFragment : Fragment(R.layout.fragment_grid_films), FilmsGridAdapt
                     }
                 }
             }
-            when(it){
+            when (it) {
                 TopFilmsType.TOP_100_POPULAR_FILMS.toString() -> {
                     toolbarTitle.text = "Топ 100"
                     adapter.setAdapterType(TopFilmsType.TOP_100_POPULAR_FILMS)
@@ -83,7 +85,8 @@ class FilmsGridFragment : Fragment(R.layout.fragment_grid_films), FilmsGridAdapt
                     adapter.setAdapterType(TopFilmsType.TOP_AWAIT_FILMS)
                     viewModel.initialListLoad(TopFilmsType.TOP_AWAIT_FILMS)
                 }
-                else -> { }
+                else -> {
+                }
             }
         }
 

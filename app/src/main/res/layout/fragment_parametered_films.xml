@@ -17,8 +17,8 @@
             android:id="@+id/homeToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentInsetStart="15dp"
-            app:contentInsetEnd="15dp">
+            app:contentInsetEnd="15dp"
+            app:contentInsetStart="15dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -44,13 +44,13 @@
                     android:id="@+id/toolbarTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Поиск по параметрам"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:layout_marginStart="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/back"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="Поиск по параметрам" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>

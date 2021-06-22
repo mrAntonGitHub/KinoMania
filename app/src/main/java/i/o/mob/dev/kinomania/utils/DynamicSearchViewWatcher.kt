@@ -4,7 +4,7 @@ import android.widget.SearchView
 
 class DynamicSearchViewWatcher(
     private val onTextSubmit: ((String?) -> Unit) = { _ -> },
-    private val onTextChange: ((CharSequence?) -> Unit) = {  _ -> }
+    private val onTextChange: ((CharSequence?) -> Unit) = { _ -> }
 ) : SearchView.OnQueryTextListener {
     override fun onQueryTextSubmit(query: String?): Boolean {
         onTextSubmit(query)

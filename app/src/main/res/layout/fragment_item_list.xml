@@ -7,15 +7,15 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/white"
         android:elevation="2dp"
-        app:contentInsetStart="15dp">
+        app:contentInsetStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/back"
@@ -34,21 +34,21 @@
             android:id="@+id/toolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Страны"
-            android:textColor="@color/black"
             android:layout_marginStart="20dp"
-            android:textSize="18sp" />
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:text="Страны" />
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
         android:id="@+id/list"
         android:name="i.o.mob.dev.kinomania.ui.search.parametersSearch.ItemFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context=".ui.search.parametersSearch.selectItem.ItemFragment"
         app:layout_constraintBottom_toTopOf="@id/choose"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:context=".ui.parameteredSearch.selectItem.ItemFragment"
         tools:listitem="@layout/fragment_item" />
 
     <Button

@@ -37,5 +37,14 @@
     <string name="reload">Обновить</string>
     <string name="internet_connection_require">Для получения актуальной информации требуется подключение к интернету</string>
     <string name="show_all">Показать все</string>
+    <string name="parametered_search">Подобрать по параметрам</string>
+    <string name="cancel">Сбросить</string>
+    <string name="type">Тип</string>
+    <string name="any">Любой</string>
+    <string name="genre">Жанр</string>
+    <string name="countries">Страны</string>
+    <string name="year">Года</string>
+    <string name="rate">Рейтинг</string>
+    <string name="search">Поиск</string>
 
 </resources>

@@ -3,7 +3,6 @@ package i.o.mob.dev.kinomania.ui.home
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -49,10 +48,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), TopFilmsAdapterDelegate {
         initAdapters()
 
         lifecycleScope.launchWhenStarted {
-            viewModel.top100.collect{state ->
-                Log.e("HomeFragment", "$state")
-                when(state){
-                    is State.Loading -> { }
+            viewModel.top100.collect { state ->
+                when (state) {
+                    is State.Loading -> {
+                    }
                     is State.Success -> {
                         withContext(Main) {
                             top100Adapter.submitList(state.data)
@@ -76,9 +75,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), TopFilmsAdapterDelegate {
         }
 
         lifecycleScope.launchWhenCreated {
-            viewModel.top250.collect{state ->
-                when(state){
-                    is State.Loading -> { }
+            viewModel.top250.collect { state ->
+                when (state) {
+                    is State.Loading -> {
+                    }
                     is State.Success -> {
                         withContext(Main) {
                             top250Adapter.submitList(state.data)
@@ -102,10 +102,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), TopFilmsAdapterDelegate {
         }
 
         lifecycleScope.launchWhenCreated {
-            viewModel.topAwait.collect{state ->
-                Log.e("HomeFragment", "$state")
-                when(state){
-                    is State.Loading -> { }
+            viewModel.topAwait.collect { state ->
+                when (state) {
+                    is State.Loading -> {
+                    }
                     is State.Success -> {
                         withContext(Main) {
                             topAwaitAdapter.submitList(state.data)
@@ -161,7 +161,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), TopFilmsAdapterDelegate {
 
     }
 
-    private fun contentIsLoading(isLoading: Boolean){
+    private fun contentIsLoading(isLoading: Boolean) {
         CoroutineScope(Main).launch {
             when (isLoading) {
                 true -> {
