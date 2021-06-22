@@ -4,7 +4,6 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import i.o.mob.dev.kinomania.BuildConfig
 import i.o.mob.dev.kinomania.data.*
 import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.flow.Flow
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -15,7 +14,7 @@ import retrofit2.http.Query
 import kotlin.collections.ArrayList
 
 const val baseUrl = "https://kinopoiskapiunofficial.tech"
-const val kinoKey = BuildConfig.KINO_POISK_API_KEY
+const val kinoPoiskKey = BuildConfig.KINO_POISK_API_KEY
 const val APPEND_TO_RESPONSE_KEY = "append_to_response"
 
 interface KinoSearchApi {
@@ -23,38 +22,48 @@ interface KinoSearchApi {
     @GET("/api/v2.1/films/{id}?$APPEND_TO_RESPONSE_KEY=BUDGET&$APPEND_TO_RESPONSE_KEY=RATING")
     fun getFilm(@Path("id") id: Int): Deferred<FilmWrapper>
 
+    // Get film by keyword
     @GET("/api/v2.1/films/search-by-keyword")
     fun searchByKeyword(
         @Query("keyword") keyword: String,
         @Query("page") page: Int = 1
     ): Deferred<Keyword>
 
+    // Get TOP_100, TOP_250, TOP_AWAIT films
     @GET("/api/v2.2/films/top")
     fun getTopFilms(
         @Query("type") type: TopFilmsType,
         @Query("page") page: Int = 1
     ): Deferred<TopFilms>
 
+    // Get review on the film
     @GET("/api/v1/reviews")
     fun getFilmReview(
         @Query("filmId") filmId: Int,
         @Query("page") page: Int = 1
     ): Deferred<FilmReview>
 
+    // Get information in details about review
     @GET("/api/v1/reviews/details")
     fun getFilmReview(@Query("reviewId") reviewId: Int): Deferred<Review>
 
+    // Get film trailer
     @GET("/api/v2.1/films/{filmId}/videos")
     fun getFilmVideos(@Path("filmId") filmId: Int): Deferred<FilmVideos>
 
-    // Get film's staff
+    // Get film frames
+    @GET("/api/v2.1/films/{id}/frames")
+    fun getFilmFrames(@Path("id") id: Int): Deferred<FilmFrame>
+
+    // Get film staff
     @GET("/api/v1/staff")
     fun getFilmStaff(@Query("filmId") filmId: Int): Deferred<ArrayList<FilmStaff>>
 
-    // Get staff info
+    // Get staff info in details
     @GET("/api/v1/staff/{id}")
     fun getStaff(@Path("id") id: Int): Deferred<Staff>
 
+    // Get films by filters
     @GET("/api/v2.1/films/search-by-filters")
     fun getFilm(
         @Query("country") country: String?,
@@ -68,11 +77,9 @@ interface KinoSearchApi {
         @Query("page") page: Int = 1
     ): Deferred<FilmFiltered>
 
+    // Get all filters
     @GET("/api/v2.1/films/filters")
     fun getFilters(): Deferred<Filter>
-
-    @GET("/api/v2.1/films/{id}/frames")
-    fun getFilmFrames(@Path("id") id: Int): Deferred<FilmFrame>
 
     companion object {
         operator fun invoke(): KinoSearchApi {
@@ -84,7 +91,7 @@ interface KinoSearchApi {
                     .build()
                 val request: Request = chain.request()
                     .newBuilder()
-                    .header("X-API-KEY", kinoKey)
+                    .header("X-API-KEY", kinoPoiskKey)
                     .url(url)
                     .build()
                 return@Interceptor chain.proceed(request)
@@ -108,5 +115,4 @@ interface KinoSearchApi {
                 .create(KinoSearchApi::class.java)
         }
     }
-
 }
