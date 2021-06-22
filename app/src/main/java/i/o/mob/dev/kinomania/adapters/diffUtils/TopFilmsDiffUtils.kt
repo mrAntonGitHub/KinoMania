@@ -1,9 +1,12 @@
-package i.o.mob.dev.kinomania.adapters.DiffUtils
+package i.o.mob.dev.kinomania.adapters.diffUtils
 
 import androidx.recyclerview.widget.DiffUtil
 import i.o.mob.dev.kinomania.data.TopFilmItem
 
-class TopFilmsDiffUtils(private val newList: List<TopFilmItem>, private val oldList : List<TopFilmItem>) : DiffUtil.Callback() {
+class TopFilmsDiffUtils(
+    private val newList: List<TopFilmItem>,
+    private val oldList: List<TopFilmItem>
+) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldList.size
     }

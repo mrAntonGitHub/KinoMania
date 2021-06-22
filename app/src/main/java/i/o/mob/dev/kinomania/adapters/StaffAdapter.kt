@@ -10,26 +10,26 @@ import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import i.o.mob.dev.kinomania.R
 import i.o.mob.dev.kinomania.data.FilmStaff
-import i.o.mob.dev.kinomania.ui.movie.MovieFragment
 
-interface StaffAdapterDelegate{
+interface StaffAdapterDelegate {
     fun staffClicked(staff: FilmStaff)
 }
 
 class StaffAdapter : RecyclerView.Adapter<StaffAdapter.ViewHolder>() {
 
-    private var staffAdapterDelegate : StaffAdapterDelegate? = null
-    private var staff : List<FilmStaff> = listOf()
+    private var staffAdapterDelegate: StaffAdapterDelegate? = null
+    private val staff: MutableList<FilmStaff> = mutableListOf()
 
-    fun setDelegate(staffAdapterDelegate: StaffAdapterDelegate){
+    fun setDelegate(staffAdapterDelegate: StaffAdapterDelegate) {
         this.staffAdapterDelegate = staffAdapterDelegate
     }
 
-    fun submitList(staff : List<FilmStaff>) {
+    fun submitList(staff: List<FilmStaff>) {
         val diffResult: DiffUtil.DiffResult =
             DiffUtil.calculateDiff(ItemsDiffCallback(this.staff, staff))
-        this.staff = staff
         diffResult.dispatchUpdatesTo(this)
+        this.staff.clear()
+        this.staff.addAll(staff)
     }
 
     class ItemsDiffCallback(var oldList: List<FilmStaff>, var newList: List<FilmStaff>) :
@@ -48,7 +48,9 @@ class StaffAdapter : RecyclerView.Adapter<StaffAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = staff.count()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_film_staff, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.item_film_staff, parent, false)
+    )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.apply {
@@ -57,27 +59,29 @@ class StaffAdapter : RecyclerView.Adapter<StaffAdapter.ViewHolder>() {
         }
     }
 
-    inner class ViewHolder(val item: View): RecyclerView.ViewHolder(item){
+    inner class ViewHolder(val item: View) : RecyclerView.ViewHolder(item) {
         private val icon = item.findViewById<CircleImageView>(R.id.icon)
         private val name = item.findViewById<TextView>(R.id.name)
         private val job = item.findViewById<TextView>(R.id.job)
-        var staff : FilmStaff? = null
-        set(value) {
-            value?.let {newValue ->
-                field = newValue
-                newValue.apply {
-                    if (this.nameRu.isNullOrEmpty()) name.text = this.nameEn else name.text = this.nameRu
-                    this@ViewHolder.job.text = this.professionText
-                    Glide
-                        .with(icon.context)
-                        .load(this.posterUrl)
-                        .override(160,160)
-                        .into(icon)
+        var staff: FilmStaff? = null
+            set(value) {
+                value?.let { newValue ->
+                    field = newValue
+                    newValue.apply {
+                        if (this.nameRu.isNullOrEmpty()) name.text = this.nameEn else name.text =
+                            this.nameRu
+                        this@ViewHolder.job.text = this.professionText
+                        Glide
+                            .with(icon.context)
+                            .load(this.posterUrl)
+                            .override(160, 160)
+                            .into(icon)
+                    }
                 }
             }
-        }
-        fun onItemClicked(){
-          staffAdapterDelegate?.staffClicked(this@StaffAdapter.staff[absoluteAdapterPosition])
+
+        fun onItemClicked() {
+            staffAdapterDelegate?.staffClicked(this@StaffAdapter.staff[absoluteAdapterPosition])
         }
     }
 

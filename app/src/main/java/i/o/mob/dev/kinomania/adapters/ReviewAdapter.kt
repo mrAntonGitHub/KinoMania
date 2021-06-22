@@ -7,28 +7,29 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import de.hdodenhof.circleimageview.CircleImageView
 import i.o.mob.dev.kinomania.R
 import i.o.mob.dev.kinomania.data.Review
 import i.o.mob.dev.kinomania.utils.Utils.Companion.reviewDataToReadable
 
-interface ReviewAdapterDelegate{
+interface ReviewAdapterDelegate {
     fun reviewClicked(review: Review)
 }
 
 class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
 
-    private var reviewAdapterDelegate : ReviewAdapterDelegate? = null
-    private var reviews : List<Review> = listOf()
+    private var reviewAdapterDelegate: ReviewAdapterDelegate? = null
+    private var reviews: MutableList<Review> = mutableListOf()
 
-    fun setDelegate(reviewAdapterDelegate: ReviewAdapterDelegate){
+    fun setDelegate(reviewAdapterDelegate: ReviewAdapterDelegate) {
         this.reviewAdapterDelegate = reviewAdapterDelegate
     }
 
-    fun submitList(reviews : List<Review>) {
-        val diffResult: DiffUtil.DiffResult = DiffUtil.calculateDiff(ItemsDiffCallback(this.reviews, reviews))
-        this.reviews = reviews
+    fun submitList(reviews: List<Review>) {
+        val diffResult: DiffUtil.DiffResult =
+            DiffUtil.calculateDiff(ItemsDiffCallback(this.reviews, reviews))
         diffResult.dispatchUpdatesTo(this)
+        this.reviews.clear()
+        this.reviews.addAll(reviews)
     }
 
     class ItemsDiffCallback(var oldList: List<Review>, var newList: List<Review>) :
@@ -48,7 +49,9 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = reviews.count()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_film_review, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.item_film_review, parent, false)
+    )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.apply {
@@ -57,7 +60,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
         }
     }
 
-    inner class ViewHolder(val item: View): RecyclerView.ViewHolder(item){
+    inner class ViewHolder(val item: View) : RecyclerView.ViewHolder(item) {
         private val type = item.findViewById<View>(R.id.reviewType)
         private val thumb = item.findViewById<ImageView>(R.id.thumb)
         private val name = item.findViewById<TextView>(R.id.name)
@@ -66,39 +69,43 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
         private val text = item.findViewById<TextView>(R.id.reviewText)
 
         var review: Review? = null
-        set(value) {
-            value?.let {newValue ->
-                field = newValue
-                newValue.apply {
-                    name.text = this.reviewAutor
-                    data.text = this.reviewData.reviewDataToReadable()
-                    title.text = this.reviewTitle
-                    text.text = this.reviewDescription
-                    when(this.reviewType){
-                        "NEGATIVE" -> {
-                            val red = item.resources.getColor(android.R.color.holo_red_light, null)
-                            type.setBackgroundColor(red)
-                            thumb.setImageResource(R.drawable.ic_thumb_down)
-                            thumb.setColorFilter(red)
-                        }
-                        "NEUTRAL" -> {
-                            val green = item.resources.getColor(android.R.color.holo_green_light, null)
-                            type.setBackgroundColor(green)
-                            thumb.setImageResource(R.drawable.ic_thumb_up)
-                            thumb.setColorFilter(green)
-                        }
-                        else -> {
-                            val green = item.resources.getColor(android.R.color.holo_green_light, null)
-                            type.setBackgroundColor(green)
-                            thumb.setImageResource(R.drawable.ic_thumb_up)
-                            thumb.setColorFilter(green)
+            set(value) {
+                value?.let { newValue ->
+                    field = newValue
+                    newValue.apply {
+                        name.text = this.reviewAutor
+                        data.text = this.reviewData.reviewDataToReadable()
+                        title.text = this.reviewTitle
+                        text.text = this.reviewDescription
+                        when (this.reviewType) {
+                            "NEGATIVE" -> {
+                                val red =
+                                    item.resources.getColor(android.R.color.holo_red_light, null)
+                                type.setBackgroundColor(red)
+                                thumb.setImageResource(R.drawable.ic_thumb_down)
+                                thumb.setColorFilter(red)
+                            }
+                            "NEUTRAL" -> {
+                                val green =
+                                    item.resources.getColor(android.R.color.holo_green_light, null)
+                                type.setBackgroundColor(green)
+                                thumb.setImageResource(R.drawable.ic_thumb_up)
+                                thumb.setColorFilter(green)
+                            }
+                            else -> {
+                                val green =
+                                    item.resources.getColor(android.R.color.holo_green_light, null)
+                                type.setBackgroundColor(green)
+                                thumb.setImageResource(R.drawable.ic_thumb_up)
+                                thumb.setColorFilter(green)
+                            }
                         }
                     }
                 }
             }
-        }
-        fun onItemClicked(){
-          reviewAdapterDelegate?.reviewClicked(this@ReviewAdapter.reviews[absoluteAdapterPosition])
+
+        fun onItemClicked() {
+            reviewAdapterDelegate?.reviewClicked(this@ReviewAdapter.reviews[absoluteAdapterPosition])
         }
     }
 
